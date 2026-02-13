@@ -52,7 +52,7 @@ export function Navbar() {
             >
               <Link
                 href={`/${item.toLowerCase().replace(" ", "")}`}
-                className="text-sm font-medium transition-colors hover:text-amber-600 dark:hover:text-amber-500"
+                className="text-sm font-medium transition-colors text-zinc-600 hover:text-amber-600 dark:text-zinc-300 dark:hover:text-amber-500"
               >
                 {item}
               </Link>

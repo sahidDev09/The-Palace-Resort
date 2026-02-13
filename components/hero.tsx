@@ -58,7 +58,7 @@ export function Hero() {
   };
 
   return (
-    <section className=" py-24 container mx-auto">
+    <section className="relative min-h-[90vh] flex items-center py-24 w-full overflow-hidden">
       {/* Background Images - No Scale, No Overlay */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
@@ -79,6 +79,9 @@ export function Hero() {
           />
         </AnimatePresence>
       </div>
+
+      {/* Top Overlay for Navbar Visibility */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-[1]" />
 
       {/* Light Theme Overlay */}
       {resolvedTheme === "light" && (
