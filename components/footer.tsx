@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="bg-zinc-50 py-16 dark:bg-zinc-950">
+    <footer className="bg-muted py-16">
       <div className="container mx-auto px-6">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
@@ -16,7 +16,7 @@ export function Footer() {
                 className="h-12 w-auto object-contain dark:invert"
               />
             </Link>
-            <p className="max-w-sm text-zinc-600 dark:text-zinc-400">
+            <p className="max-w-sm text-muted-foreground">
               The Palace Luxury Resort Bahubal offers an unparalleled experience
               of luxury and comfort in the heart of nature. Discover serenity
               and elegance.
@@ -24,27 +24,27 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-zinc-900 dark:text-white">
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-foreground">
               Quick Links
             </h4>
-            <ul className="space-y-4 text-zinc-600 dark:text-zinc-400">
+            <ul className="space-y-4 text-muted-foreground">
               <li>
-                <Link href="/rooms" className="hover:text-amber-600">
+                <Link href="/rooms" className="hover:text-primary transition-colors">
                   Rooms & Suites
                 </Link>
               </li>
               <li>
-                <Link href="/dining" className="hover:text-amber-600">
+                <Link href="/dining" className="hover:text-primary transition-colors">
                   Dining Experience
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="hover:text-amber-600">
+                <Link href="/events" className="hover:text-primary transition-colors">
                   Events & Weddings
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="hover:text-amber-600">
+                <Link href="/gallery" className="hover:text-primary transition-colors">
                   Resort Gallery
                 </Link>
               </li>
@@ -52,10 +52,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-zinc-900 dark:text-white">
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-foreground">
               Contact
             </h4>
-            <ul className="space-y-4 text-zinc-600 dark:text-zinc-400">
+            <ul className="space-y-4 text-muted-foreground">
               <li>Bahubal, Habiganj, Sylhet</li>
               <li>+880 1234 567890</li>
               <li>info@thepalaceresort.com</li>
@@ -63,16 +63,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between border-t border-zinc-200 pt-8 dark:border-zinc-800 md:flex-row">
-          <p className="text-sm text-zinc-500">
+        <div className="mt-16 flex flex-col items-center justify-between border-t border-border pt-8 md:flex-row">
+          <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} The Palace Luxury Resort. All rights
             reserved.
           </p>
           <div className="mt-4 flex gap-6 md:mt-0">
-            <Link href="#" className="text-sm text-zinc-500 hover:text-amber-600">
+            <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-sm text-zinc-500 hover:text-amber-600">
+            <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
             </Link>
           </div>

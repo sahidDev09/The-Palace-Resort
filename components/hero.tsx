@@ -23,9 +23,9 @@ export function Hero() {
   if (!mounted) return null;
 
   const stats = [
-    { label: "Guest Satisfaction", value: "98%", icon: <Star className="h-4 w-4 text-amber-500" /> },
-    { label: "Luxury Suites", value: "120+", icon: <Hotel className="h-4 w-4 text-amber-500" /> },
-    { label: "Happy Clients", value: "50k+", icon: <Users className="h-4 w-4 text-amber-500" /> },
+    { label: "Guest Satisfaction", value: "98%", icon: <Star className="h-4 w-4 text-primary" /> },
+    { label: "Luxury Suites", value: "120+", icon: <Hotel className="h-4 w-4 text-primary" /> },
+    { label: "Happy Clients", value: "50k+", icon: <Users className="h-4 w-4 text-primary" /> },
   ];
 
   const serviceLinks = [
@@ -101,7 +101,7 @@ export function Hero() {
           <div className="lg:max-w-3xl space-y-8">
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-amber-500 text-sm font-semibold tracking-wide"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-primary text-sm font-semibold tracking-wide"
             >
               <Sparkles className="h-4 w-4 animate-pulse" />
               <span>#3 Five-Star Hotel in Asia</span>
@@ -130,8 +130,8 @@ export function Hero() {
               className="w-full bg-black/20 backdrop-blur-2xl border border-white/10 p-6 md:p-7 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
             >
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                <div className="p-1.5 rounded-lg bg-amber-500/20">
-                  <ConciergeBell className="text-amber-500 h-5 w-5" />
+                <div className="p-1.5 rounded-lg bg-primary/20">
+                  <ConciergeBell className="text-primary h-5 w-5" />
                 </div>
                 Quick Services
               </h3>
@@ -140,16 +140,16 @@ export function Hero() {
                   <Link
                     key={index}
                     href={link.href}
-                    className="group flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-500"
+                    className="group flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 hover:bg-primary/10 hover:border-primary/40 transition-all duration-500"
                   >
                     <div className="flex items-center gap-4 text-white">
-                      <span className="p-2.5 rounded-lg bg-white/5 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                      <span className="p-2.5 rounded-lg bg-white/5 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.5)]">
                         {link.icon}
                       </span>
                       <span className="font-semibold text-base">{link.title}</span>
                     </div>
-                    <div className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-amber-500/20 transition-all">
-                      <ArrowRight className="h-4 w-4 text-zinc-500 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                    <div className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-primary/20 transition-all">
+                      <ArrowRight className="h-4 w-4 text-white/50 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     </div>
                   </Link>
                 ))}
@@ -164,9 +164,9 @@ export function Hero() {
           <div className="flex flex-wrap gap-6">
             <motion.button 
               variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 rounded-2xl bg-amber-600 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-amber-500 transition-all shadow-[0_10px_30px_rgba(217,119,6,0.4)]"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-10 py-5 rounded-2xl bg-amber-500 text-white font-bold uppercase tracking-[0.2em] text-sm shadow-[0_10px_30px_rgba(245,158,11,0.3)] hover:bg-amber-600 transition-all"
             >
               Explore Now
             </motion.button>
@@ -187,9 +187,9 @@ export function Hero() {
               className="grid grid-cols-3 gap-4"
             >
               {stats.map((stat, index) => (
-                <div key={index} className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group hover:border-amber-500/50 transition-all">
+                <div key={index} className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group hover:border-primary/50 transition-all">
                   <div className="flex justify-center mb-2 group-hover:scale-110 transition-transform duration-500">
-                    <div className="p-1.5 rounded-lg bg-amber-500/10">
+                    <div className="p-1.5 rounded-lg bg-primary/10">
                       {stat.icon}
                     </div>
                   </div>

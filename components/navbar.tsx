@@ -21,7 +21,7 @@ export function Navbar() {
     <nav
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 py-4 shadow-sm backdrop-blur-md dark:bg-zinc-950/80"
+          ? "bg-background py-4 shadow-sm backdrop-blur-md"
           : "bg-transparent py-6"
       }`}
     >
@@ -52,7 +52,7 @@ export function Navbar() {
             >
               <Link
                 href={`/${item.toLowerCase().replace(" ", "")}`}
-                className="text-sm font-medium transition-colors text-zinc-600 hover:text-amber-600 dark:text-zinc-300 dark:hover:text-amber-500"
+                className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
               >
                 {item}
               </Link>
@@ -67,7 +67,7 @@ export function Navbar() {
           transition={{ duration: 0.5 }}
         >
           <ThemeToggle />
-          <button className="rounded-full bg-amber-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-amber-700 active:scale-95">
+          <button className="rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] transition-all hover:bg-amber-600 hover:shadow-[0_6px_20px_rgba(245,158,11,0.23)] active:scale-95">
             Book Now
           </button>
         </motion.div>

@@ -1,22 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #DBEAFF;
+  --foreground: #111827;
+  --primary: #f59e0b; /* amber-500 */
+  --secondary: #4b5563; /* gray-600 */
+  --muted: #f3f4f6; /* gray-100 */
+  --muted-foreground: #6b7280; /* gray-500 */
+  --border: #e5e7eb; /* gray-200 */
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #DBEAFF;
+  --primary: #f59e0b; /* amber-500 */
+  --secondary: #9ca3af; /* gray-400 */
+  --muted: #18181b; /* zinc-900 */
+  --muted-foreground: #a1a1aa; /* zinc-400 */
+  --border: #27272a; /* zinc-800 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-therilo: var(--font-therilo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
   }
 }
 
@@ -38,18 +57,31 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure all background and text colors transition smoothly */
-* {
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+/* Smooth layout transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-/* Prevent transitions on mount (optional but recommended with next-themes) */
+/* Disable transitions on mount */
 .disable-transitions * {
   transition: none !important;
+}
+
+/* Optional: Smooth transitions when theme changes */
+html.loading * {
+  transition: none !important;
+}
+
+html:not(.loading) body {
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
