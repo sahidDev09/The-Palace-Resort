@@ -1,22 +1,65 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useIsMounted } from "@/hooks/use-is-mounted";
 import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ArrowRight, 
+  Hotel, 
+  ConciergeBell, 
+  Eye, 
+  Star, 
+  Users, 
+  Calendar,
+  Sparkles
+} from "lucide-react";
+import Link from "next/link";
+import { Variants } from "framer-motion";
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   if (!mounted) return null;
 
+  const stats = [
+    { label: "Guest Satisfaction", value: "98%", icon: <Star className="h-4 w-4 text-amber-500" /> },
+    { label: "Luxury Suites", value: "120+", icon: <Hotel className="h-4 w-4 text-amber-500" /> },
+    { label: "Happy Clients", value: "50k+", icon: <Users className="h-4 w-4 text-amber-500" /> },
+  ];
+
+  const serviceLinks = [
+    { title: "Book a hotel service", href: "/services/hotel", icon: <Calendar className="h-5 w-5" /> },
+    { title: "Book a room service", href: "/services/room", icon: <ConciergeBell className="h-5 w-5" /> },
+    { title: "View hotel service", href: "/services", icon: <Eye className="h-5 w-5" /> },
+  ];
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1] // Custom ease curve for a smoother feel
+      } 
+    },
+  };
+
   return (
-    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden">
-      {/* Background Images with Framer Motion Cross-fade */}
+    <section className=" py-24 container mx-auto">
+      {/* Background Images - No Scale, No Overlay */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
           <motion.div
@@ -33,50 +76,132 @@ export function Hero() {
                   : "/assets/palace-hero-light.jpg"
               }')`,
             }}
-          >
-            <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
-          </motion.div>
+          />
         </AnimatePresence>
       </div>
 
-      {/* Hero Content */}
-      <div className="container relative z-10 mx-auto px-6 text-center text-white">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6 text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl"
-        >
-          Luxury Redefined
-        </motion.h1>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mb-10 max-w-2xl text-lg text-zinc-100 md:text-xl"
-        >
-          Escape to a world where comfort meets elegance. Experience the finest
-          hospitality at The Palace Resort Bahubal.
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex justify-center gap-4"
-        >
-          <button className="rounded-full bg-amber-600 px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-amber-700 active:scale-95">
-            Explore Rooms
-          </button>
-          <button className="rounded-full border-2 border-white bg-transparent px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-black active:scale-95">
-            Take a Tour
-          </button>
-        </motion.div>
-      </div>
+      {/* Light Theme Overlay */}
+      {resolvedTheme === "light" && (
+        <div className="absolute inset-0 z-[1] bg-black/20 pointer-events-none" />
+      )}
 
-      {/* Subtle bottom gradient */}
-      <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      {/* Main Content Container */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="container relative z-10 mx-auto flex flex-col gap-16 mt-4"
+      >
+        {/* Row 1: Heading/Description & Quick Services */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
+          {/* Top Left: Heading & Description */}
+          <div className="lg:max-w-3xl space-y-8">
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-amber-500 text-sm font-semibold tracking-wide"
+            >
+              <Sparkles className="h-4 w-4 animate-pulse" />
+              <span>Premium Hospitality Experience</span>
+            </motion.div>
+            
+            <motion.h1 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-2xl uppercase"
+            >
+             Discover best hospitality in <br />the palace luxury resort
+            </motion.h1>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl text-zinc-100 max-w-2xl drop-shadow-md leading-relaxed"
+            >
+              Immerse yourself in unparalleled luxury. Our resort offers a sanctuary of peace 
+              and elegance, designed for those who seek the extraordinary in every moment.
+            </motion.p>
+          </div>
+
+          {/* Top Right: FAQ / Service Links System */}
+          <div className="w-full lg:w-1/3">
+            <motion.div
+              variants={itemVariants}
+              className="w-full bg-black/20 backdrop-blur-2xl border border-white/10 p-6 md:p-7 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            >
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                <div className="p-1.5 rounded-lg bg-amber-500/20">
+                  <ConciergeBell className="text-amber-500 h-5 w-5" />
+                </div>
+                Quick Services
+              </h3>
+              <div className="space-y-3">
+                {serviceLinks.map((link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className="group flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/40 transition-all duration-500"
+                  >
+                    <div className="flex items-center gap-4 text-white">
+                      <span className="p-2.5 rounded-lg bg-white/5 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+                        {link.icon}
+                      </span>
+                      <span className="font-semibold text-base">{link.title}</span>
+                    </div>
+                    <div className="h-8 w-8 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-amber-500/20 transition-all">
+                      <ArrowRight className="h-4 w-4 text-zinc-500 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Row 2: Action Buttons & Stats */}
+        <div className="flex flex-col lg:flex-row justify-between items-end gap-12 w-full">
+          {/* Bottom Left: Action Buttons */}
+          <div className="flex flex-wrap gap-6">
+            <motion.button 
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-5 rounded-2xl bg-amber-600 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-amber-500 transition-all shadow-[0_10px_30px_rgba(217,119,6,0.4)]"
+            >
+              Explore Now
+            </motion.button>
+            <motion.button 
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-white hover:text-black transition-all"
+            >
+              View Gallery
+            </motion.button>
+          </div>
+
+          {/* Bottom Right: Stats */}
+          <div className="w-full lg:w-auto">
+            <motion.div
+              variants={itemVariants}
+              className="grid grid-cols-3 gap-4"
+            >
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group hover:border-amber-500/50 transition-all">
+                  <div className="flex justify-center mb-2 group-hover:scale-110 transition-transform duration-500">
+                    <div className="p-1.5 rounded-lg bg-amber-500/10">
+                      {stat.icon}
+                    </div>
+                  </div>
+                  <div className="text-2xl font-black text-white mb-0.5">{stat.value}</div>
+                  <div className="text-[9px] uppercase tracking-[0.1em] text-zinc-400 font-bold">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+      </motion.div>
+
+      {/* Decorative Bottom Shadow (to ensure content at the bottom of the page is visible) */}
+      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-[1]" />
     </section>
   );
 }
