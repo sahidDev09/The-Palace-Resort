@@ -104,7 +104,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-amber-500 text-sm font-semibold tracking-wide"
             >
               <Sparkles className="h-4 w-4 animate-pulse" />
-              <span>Premium Hospitality Experience</span>
+              <span>#3 Five-Star Hotel in Asia</span>
             </motion.div>
             
             <motion.h1 

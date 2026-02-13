@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -17,22 +17,22 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="relative flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
       aria-label="Toggle theme"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={theme}
+          key={resolvedTheme}
           initial={{ y: -20, opacity: 0, rotate: -90 }}
           animate={{ y: 0, opacity: 1, rotate: 0 }}
           exit={{ y: 20, opacity: 0, rotate: 90 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
         >
-          {theme === "dark" ? (
-            <Moon className="h-5 w-5 text-amber-400" />
+          {resolvedTheme === "dark" ? (
+            <Sun className="h-5 w-5 text-amber-500" />
           ) : (
-            <Sun className="h-5 w-5 text-amber-600" />
+            <Moon className="h-5 w-5 text-zinc-600" />
           )}
         </motion.div>
       </AnimatePresence>

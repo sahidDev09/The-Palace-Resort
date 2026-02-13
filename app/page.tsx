@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
+import { AnnouncementCarousel } from "@/components/announcement-carousel";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      <AnnouncementCarousel />
       
       {/* Welcome Section */}
       <section className="bg-white py-24 dark:bg-black">
@@ -33,9 +35,9 @@ export default function Home() {
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { title: "Presidential Suite", price: "$450" },
-              { title: "Ocean View Villa", price: "$350" },
-              { title: "Garden Deluxe", price: "$250" },
+              { title: "Presidential Suite", price: "55,000 BDT" },
+              { title: "Ocean View Villa", price: "42,000 BDT" },
+              { title: "Garden Deluxe", price: "30,000 BDT" },
             ].map((room, i) => (
               <div key={i} className="group overflow-hidden rounded-2xl bg-white shadow-md dark:bg-zinc-950">
                 <div className="aspect-[4/3] w-full bg-zinc-200 dark:bg-zinc-800 transition-transform duration-500 group-hover:scale-110"></div>
