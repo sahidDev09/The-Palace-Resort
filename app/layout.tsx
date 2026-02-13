@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeTransition } from "@/components/theme-transition";
 
 export const metadata: Metadata = {
   title: "The Palace | Luxury Resort",
@@ -35,6 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ThemeTransition />
           {children}
         </ThemeProvider>
       </body>
