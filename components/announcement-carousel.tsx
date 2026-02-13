@@ -15,6 +15,7 @@ const offers = [
     description: "A secluded sanctuary with private garden, infinity plunge pool, and personalized butler service for ultimate intimacy.",
     image: "/assets/real_villa.png",
     price: "From 45,000 BDT",
+    previousPrice: "55,000 BDT",
     color: "amber"
   },
   {
@@ -24,6 +25,7 @@ const offers = [
     description: "Spacious interconnecting suites with luxury child-friendly amenities, private living area, and inclusive family activities.",
     image: "/assets/offer_family.png",
     price: "From 65,000 BDT",
+    previousPrice: "80,000 BDT",
     color: "emerald"
   },
   {
@@ -33,6 +35,7 @@ const offers = [
     description: "Experience the pinnacle of luxury in our residential estates. Perfect for long-term stays with full resort privileges and private estate staff.",
     image: "/assets/real_residential.jpg",
     price: "From 125,000 BDT",
+    previousPrice: "150,000 BDT",
     color: "rose"
   },
   {
@@ -42,6 +45,7 @@ const offers = [
     description: "A private 5-course gourmet experience under the stars with live music and curated wine pairing in our lush botanical gardens.",
     image: "/assets/offer3.png",
     price: "From 14,000 BDT",
+    previousPrice: "18,000 BDT",
     color: "amber"
   },
 ];
@@ -147,7 +151,10 @@ export function AnnouncementCarousel() {
             {/* Price in Image */}
             <div className="animate-text absolute bottom-8 left-8 flex flex-col">
               <span className="text-white/70 text-xs font-bold uppercase tracking-tighter">Experience luxury</span>
-              <span className="text-3xl font-black text-white">{offers[currentSlide].price}</span>
+              <div className="flex items-baseline gap-3">
+                <span className="text-3xl font-black text-white">{offers[currentSlide].price}</span>
+                <span className="text-lg font-bold text-white/40 line-through decoration-amber-500/50 decoration-2">{offers[currentSlide].previousPrice}</span>
+              </div>
             </div>
           </div>
 
@@ -162,17 +169,29 @@ export function AnnouncementCarousel() {
               {offers[currentSlide].title}
             </h2>
             
-            <p className={`animate-text text-zinc-600 dark:text-zinc-400 text-xl mb-10 leading-relaxed max-w-lg ${resolvedTheme === "dark" ? "dark:text-zinc-400" : "text-zinc-600"}`}>
+            <p className={`animate-text text-zinc-600 dark:text-zinc-400 text-xl mb-6 leading-relaxed max-w-lg ${resolvedTheme === "dark" ? "dark:text-zinc-400" : "text-zinc-600"}`}>
               {offers[currentSlide].description}
             </p>
 
+            <div className="animate-text flex items-baseline gap-4 mb-10">
+              <span className={`text-4xl font-black ${resolvedTheme === "dark" ? "text-white" : "text-black"}`}>
+                {offers[currentSlide].price.replace("From ", "")}
+              </span>
+              <span className="text-xl font-bold text-zinc-500/50 line-through decoration-amber-600/60 decoration-2">
+                {offers[currentSlide].previousPrice}
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-600/10 px-3 py-1 rounded-lg ml-2">
+                Limited Time
+              </span>
+            </div>
+
             <div className="animate-text flex flex-wrap items-center gap-6 mb-12">
-              <button className="group relative flex items-center gap-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-amber-600 dark:hover:bg-amber-600 dark:hover:text-white transition-all shadow-xl">
+              <button className="group relative flex items-center gap-4 bg-amber-600 cursor-pointer text-white  px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all shadow-xl">
                 Claim Offer
                 <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
               
-              <button className={`font-bold uppercase tracking-widest text-sm border-b-2 border-zinc-200 dark:border-zinc-800b hover:border-amber-600 transition-all py-1 ${resolvedTheme === "dark" ? "dark:text-white" : "text-black"}`}>
+              <button className={`font-bold uppercase tracking-widest text-sm border-b-2 border-zinc-200 dark:border-zinc-800 hover:border-amber-600 transition-all py-1 ${resolvedTheme === "dark" ? "dark:text-white" : "text-black"}`}>
                 View Details
               </button>
             </div>
