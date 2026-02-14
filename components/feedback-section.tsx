@@ -113,7 +113,7 @@ export function FeedbackSection() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   return (
-    <section className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-4">
+    <section className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-14">
       {/* Background decorative blobs */}
       <div className="pointer-events-none absolute top-1/4 -left-32 h-64 w-64 rounded-full bg-orange-400/5 blur-3xl dark:bg-orange-500/10" />
       <div className="pointer-events-none absolute bottom-1/4 -right-32 h-64 w-64 rounded-full bg-blue-400/5 blur-3xl dark:bg-blue-500/10" />
