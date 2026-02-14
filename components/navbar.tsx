@@ -35,11 +35,11 @@ export function Navbar() {
         >
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/assets/palace-logo.png"
+              src="/assets/palace-nav-logo.png"
               alt="The Palace Logo"
               width={120}
               height={40}
-              className="h-10 w-auto object-contain dark:invert"
+              className="h-10 w-auto object-contain"
             />
           </Link>
         </motion.div>

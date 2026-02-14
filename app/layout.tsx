@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { AnimatedGradientBG } from "@/components/animated-gradient-bg";
 
 export default function RootLayout({
   children,
@@ -43,6 +44,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AnimatedGradientBG />
           <Navbar />
           {children}
           <Footer />

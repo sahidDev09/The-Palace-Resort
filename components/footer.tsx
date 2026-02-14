@@ -13,7 +13,7 @@ export function Footer() {
                 alt="The Palace Logo"
                 width={150}
                 height={50}
-                className="h-12 w-auto object-contain dark:invert"
+                className="h-22 w-auto object-contain dark:invert"
               />
             </Link>
             <p className="max-w-sm text-muted-foreground">
