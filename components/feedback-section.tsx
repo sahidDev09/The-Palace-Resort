@@ -3,6 +3,7 @@
 import { Marquee } from "@/components/ui/marquee";
 import Image from "next/image";
 import { Star, Quote } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const reviews = [
   {
@@ -51,12 +52,15 @@ const ReviewCard = ({
   name,
   role,
   body,
+  resolvedTheme,
 }: {
   img: string;
   name: string;
   role: string;
   body: string;
+  resolvedTheme: string | undefined;
 }) => {
+  const isDark = resolvedTheme === "dark";
   return (
     <figure className="glass-card group relative w-[380px] cursor-pointer overflow-hidden rounded-2xl p-7 transition-all duration-500 hover:-translate-y-2">
       {/* Liquid gradient overlay */}
@@ -83,10 +87,10 @@ const ReviewCard = ({
           />
         </div>
         <div className="flex flex-col">
-          <figcaption className="text-base font-bold text-[#1a1a2e] dark:text-white">
+          <figcaption className={`text-base font-bold ${isDark ? "text-white" : "text-black"}`}>
             {name}
           </figcaption>
-          <p className="text-sm text-[#6b7280] dark:text-[#a1a1aa]">{role}</p>
+          <p className={`text-sm ${isDark ? "text-zinc-400" : "text-black"}`}>{role}</p>
         </div>
       </div>
 
@@ -98,7 +102,7 @@ const ReviewCard = ({
       </div>
 
       {/* Quote */}
-      <blockquote className="relative mt-4 text-[15px] leading-relaxed text-[#374151] dark:text-[#d4d4d8]">
+      <blockquote className={`relative mt-4 text-[15px] leading-relaxed ${isDark ? "text-white" : "text-black"}`}>
         &ldquo;{body}&rdquo;
       </blockquote>
     </figure>
@@ -106,20 +110,22 @@ const ReviewCard = ({
 };
 
 export function FeedbackSection() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
   return (
-    <section className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-14">
+    <section className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-4">
       {/* Background decorative blobs */}
       <div className="pointer-events-none absolute top-1/4 -left-32 h-64 w-64 rounded-full bg-orange-400/5 blur-3xl dark:bg-orange-500/10" />
       <div className="pointer-events-none absolute bottom-1/4 -right-32 h-64 w-64 rounded-full bg-blue-400/5 blur-3xl dark:bg-blue-500/10" />
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-purple-400/3 blur-3xl dark:bg-purple-500/5" />
 
       <div className="relative z-10 mb-16 px-4 text-center">
-        <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <h2 className={`text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl ${isDark ? "text-white" : "text-black"}`}>
           What Our Guests Say
         </h2>
         <div className="mt-4 flex flex-col items-center gap-2">
           <div className="h-1 w-20 rounded-full bg-gradient-to-r from-orange-400 to-orange-600" />
-          <p className="max-w-2xl text-lg text-muted-foreground">
+          <p className={`max-w-4xl text-lg ${isDark ? "text-white" : "text-black"}`}>
             Discover why travelers choose The Palace Resort for their most memorable stays and dining experiences.
           </p>
         </div>
@@ -128,12 +134,12 @@ export function FeedbackSection() {
       <div className="relative z-10 flex w-full flex-col gap-6">
         <Marquee pauseOnHover className="[--duration:40s] [--gap:1.5rem] py-4">
           {firstRow.map((review) => (
-            <ReviewCard key={review.name} {...review} />
+            <ReviewCard key={review.name} {...review} resolvedTheme={resolvedTheme} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:40s] [--gap:1.5rem] py-4">
           {secondRow.map((review) => (
-            <ReviewCard key={review.name} {...review} />
+            <ReviewCard key={review.name} {...review} resolvedTheme={resolvedTheme} />
           ))}
         </Marquee>
       </div>

@@ -3,11 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
+import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +54,7 @@ export function Navbar() {
             >
               <Link
                 href={`/${item.toLowerCase().replace(" ", "")}`}
-                className="text-sm font-medium transition-colors text-muted-foreground hover:text-primary"
+                className={`text-sm font-medium transition-colors hover:text-primary ${resolvedTheme === "dark" ? "text-zinc-100" : isScrolled ? "text-zinc-800" : "text-zinc-100"}`}
               >
                 {item}
               </Link>
@@ -66,7 +68,7 @@ export function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <ThemeToggle />
+          <ThemeToggle isScrolled={isScrolled} />
           <button className="rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] transition-all hover:bg-amber-600 hover:shadow-[0_6px_20px_rgba(245,158,11,0.23)] active:scale-95">
             Book Now
           </button>
