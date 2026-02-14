@@ -1,38 +1,37 @@
 import React from "react";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { MoveRight, Plus } from "lucide-react";
+import { MoveRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ROOMS } from "@/lib/constants";
 
-export function RoomsSection() {
-  const displayedRooms = ROOMS.slice(0, 3);
-
+export default function RoomsPage() {
   return (
-    <section className="py-24 bg-neutral-950 text-white overflow-hidden" id="rooms">
+    <main className="min-h-screen bg-neutral-950 text-white pt-32 pb-24">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-              Our Luxurious <span className="text-amber-500">Rooms</span>
-            </h2>
-            <p className="text-neutral-400 text-lg">
-              Indulge in unparalleled comfort and sophistication. Each room is meticulously designed 
-              to provide an unforgettable stay at The Palace Resort.
+        {/* Header Section */}
+        <div className="mb-16">
+          <Link 
+            href="/" 
+            className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors mb-8 group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </Link>
+          <div className="max-w-3xl">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+              Our <span className="text-amber-500">Accommodations</span>
+            </h1>
+            <p className="text-neutral-400 text-xl leading-relaxed">
+              From elegant suites to private villas, discover our collection of luxury living spaces 
+              designed for the most discerning travelers.
             </p>
           </div>
-          <Link 
-            href="/rooms"
-            className="group flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all duration-300"
-          >
-            See All Rooms
-            <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
-          </Link>
         </div>
 
-
+        {/* Rooms Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedRooms.map((room) => (
+          {ROOMS.map((room) => (
             <CardSpotlight key={room.id} className="h-full min-h-[500px] flex flex-col p-6 cursor-pointer">
               <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
                 <Image 
@@ -76,6 +75,6 @@ export function RoomsSection() {
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 }

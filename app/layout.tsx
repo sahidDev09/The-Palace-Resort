@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   description: "Experience luxury at The Palace Resort",
 };
 
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +43,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
