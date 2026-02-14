@@ -65,7 +65,7 @@ export default function RoomsPage() {
                     ))}
                   </div>
 
-                  <button className="flex items-center gap-2 text-white font-semibold group/btn">
+                  <button className="flex items-center gap-2 text-white font-semibold bg-amber-500 hover:bg-amber-600 px-5 py-2.5 rounded-lg transition-colors group/btn">
                     Book This Room
                     <MoveRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
                   </button>
