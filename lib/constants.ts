@@ -48,3 +48,76 @@ export const ROOMS = [
     features: ["Garden View", "Outdoor Seating", "Eco-friendly", "Rain Shower"],
   },
 ];
+
+export const DINING_RESTAURANTS = [
+  {
+    id: 1,
+    name: "Olive",
+    cuisine: "Mediterranean",
+    tagline: "A taste of the Mediterranean, refined.",
+    description:
+      "Experience the flavors of the Mediterranean coastline in an intimate, rustic-elegant setting. Our award-winning chefs craft each dish with locally sourced ingredients, seasonal produce, and time-honored recipes passed down through generations.",
+    image: "/assets/dining/olive.png",
+    hours: "6:00 PM – 11:00 PM",
+    priceRange: "$$$",
+    dressCode: "Smart Casual",
+    signatures: ["Truffle Risotto", "Grilled Lamb Rack", "Tiramisu al Limone"],
+    ambiance: ["Candlelit", "Romantic", "Live Acoustic"],
+  },
+  {
+    id: 2,
+    name: "Rebulation",
+    cuisine: "Modern Fusion",
+    tagline: "Where culinary boundaries dissolve.",
+    description:
+      "A bold, contemporary dining experience featuring an open kitchen where our chefs push the boundaries of flavor. Rebulation fuses global techniques with premium ingredients, creating dishes that are as visually stunning as they are delicious.",
+    image: "/assets/dining/rebulation.png",
+    hours: "12:00 PM – 11:30 PM",
+    priceRange: "$$$$",
+    dressCode: "Smart Elegant",
+    signatures: ["Wagyu Tataki", "Deconstructed Ceviche", "Miso-Glazed Black Cod"],
+    ambiance: ["Chef's Counter", "Industrial Chic", "Open Kitchen"],
+  },
+  {
+    id: 3,
+    name: "Arabian Lounge",
+    cuisine: "Middle Eastern",
+    tagline: "An oasis of flavor and opulence.",
+    description:
+      "Step into a world of Arabian grandeur. The Arabian Lounge offers an immersive dining experience with authentic Middle Eastern cuisine, aromatic spices, and traditional shisha in a setting adorned with hand-crafted Moroccan tiles and plush velvet seating.",
+    image: "/assets/dining/arabian-lounge.png",
+    hours: "4:00 PM – 1:00 AM",
+    priceRange: "$$$",
+    dressCode: "Resort Casual",
+    signatures: ["Mixed Mezze Platter", "Lamb Ouzi", "Kunafa"],
+    ambiance: ["Ornate", "Lounge Seating", "Shisha Garden"],
+  },
+  {
+    id: 4,
+    name: "Lostalgia",
+    cuisine: "Vintage Comfort",
+    tagline: "Where memories meet the menu.",
+    description:
+      "A heartwarming retreat into the past. Lostalgia blends nostalgic comfort food with artisanal craft cocktails in a beautifully restored vintage interior. Every corner tells a story, from the antique decor to the carefully curated vinyl soundtrack.",
+    image: "/assets/dining/lostalgia.png",
+    hours: "11:00 AM – 12:00 AM",
+    priceRange: "$$",
+    dressCode: "Casual",
+    signatures: ["Smoked BBQ Ribs", "Truffle Mac & Cheese", "Classic Old Fashioned"],
+    ambiance: ["Retro Decor", "Vinyl Music", "Craft Cocktails"],
+  },
+  {
+    id: 5,
+    name: "Saigon",
+    cuisine: "Vietnamese",
+    tagline: "The soul of Vietnam, elevated.",
+    description:
+      "Journey through the vibrant streets of Ho Chi Minh City without leaving the resort. Saigon presents authentic Vietnamese cuisine with a contemporary twist, set within a lush, zen-inspired space of bamboo, paper lanterns, and flowing water features.",
+    image: "/assets/dining/saigon.png",
+    hours: "11:30 AM – 10:30 PM",
+    priceRange: "$$",
+    dressCode: "Casual",
+    signatures: ["Phở Bò", "Bánh Mì Wagyu", "Vietnamese Coffee Crème Brûlée"],
+    ambiance: ["Zen Garden", "Paper Lanterns", "Indoor Plants"],
+  },
+];
