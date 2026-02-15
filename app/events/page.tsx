@@ -150,18 +150,31 @@ export default function EventsPage() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <main className={`min-h-screen ${isDark ? "bg-[#050505] text-white" : "bg-neutral-50 text-neutral-900"}`}>
+    <main className={`relative min-h-screen overflow-hidden ${isDark ? "bg-[#050505] text-white" : "bg-neutral-50 text-neutral-900"}`}>
+      {/* Background decorative blobs - Full Height */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className={`absolute top-0 -left-24 w-[800px] h-[800px] rounded-full blur-[160px] opacity-20 ${
+          isDark ? "bg-amber-500/30" : "bg-amber-400/20"
+        }`} />
+        <div className={`absolute top-[20%] -right-24 w-[600px] h-[600px] rounded-full blur-[140px] opacity-15 ${
+          isDark ? "bg-purple-500/20" : "bg-purple-300/20"
+        }`} />
+        <div className={`absolute top-[40%] -left-32 w-[700px] h-[700px] rounded-full blur-[180px] opacity-10 ${
+          isDark ? "bg-amber-600/20" : "bg-amber-200/30"
+        }`} />
+        <div className={`absolute top-[60%] -right-32 w-[900px] h-[900px] rounded-full blur-[200px] opacity-10 ${
+          isDark ? "bg-amber-400/20" : "bg-amber-100/40"
+        }`} />
+        <div className={`absolute top-[80%] -left-20 w-[600px] h-[600px] rounded-full blur-[150px] opacity-10 ${
+          isDark ? "bg-purple-600/20" : "bg-purple-200/30"
+        }`} />
+        <div className={`absolute bottom-0 right-0 w-[800px] h-[800px] rounded-full blur-[160px] opacity-15 ${
+          isDark ? "bg-amber-500/20" : "bg-amber-300/20"
+        }`} />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative pt-24 pb-14 overflow-hidden">
-        {/* Background decorative blobs */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className={`absolute -top-24 -left-24 w-[600px] h-[600px] rounded-full blur-[140px] opacity-20 ${
-            isDark ? "bg-amber-500" : "bg-amber-400"
-          }`} />
-          <div className={`absolute top-1/2 -right-24 w-[500px] h-[500px] rounded-full blur-[120px] opacity-10 ${
-            isDark ? "bg-purple-500" : "bg-purple-300"
-          }`} />
-        </div>
+      <section className="relative pt-24 pb-14">
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div

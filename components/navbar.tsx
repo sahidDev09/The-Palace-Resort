@@ -6,10 +6,12 @@ import { ThemeToggle } from "./theme-toggle";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { resolvedTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +20,10 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isHomePage = pathname === "/";
+  // In light mode, text should be dark if scrolled OR if we are NOT on the homepage (which has a dark hero overlay)
+  const isDarkText = resolvedTheme !== "dark" && (isScrolled || !isHomePage);
 
   return (
     <nav
@@ -39,7 +45,7 @@ export function Navbar() {
               alt="The Palace Logo"
               width={120}
               height={40}
-              className="h-10 w-auto object-contain"
+              className={`h-10 w-auto object-contain transition-all duration-300 ${isDarkText ? "brightness-0" : ""}`}
             />
           </Link>
         </motion.div>
@@ -54,7 +60,9 @@ export function Navbar() {
             >
               <Link
                 href={`/${item.toLowerCase().replace(" ", "")}`}
-                className={`text-sm font-medium transition-colors hover:text-primary ${resolvedTheme === "dark" ? "text-zinc-100" : isScrolled ? "text-zinc-800" : "text-zinc-100"}`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isDarkText ? "text-zinc-800" : "text-zinc-100"
+                }`}
               >
                 {item}
               </Link>

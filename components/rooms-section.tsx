@@ -1,80 +1,73 @@
-import React from "react";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { MoveRight, Plus } from "lucide-react";
-import Image from "next/image";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 import Link from "next/link";
-import { ROOMS } from "@/lib/constants";
+import { useTheme } from "next-themes";
+import { RoomCard } from "@/components/room-card";
+import { Room } from "@/lib/types";
 
 export function RoomsSection() {
-  const displayedRooms = ROOMS.slice(0, 3);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('/api/rooms');
+        const data = await response.json();
+        setRooms(data.slice(0, 3));
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRooms();
+  }, []);
 
   return (
-    <section className="py-24 bg-neutral-950 text-white overflow-hidden" id="rooms">
+    <section className={`py-24 overflow-hidden transition-colors duration-300 ${isDark ? "bg-[#050505] text-white" : "bg-neutral-50 text-neutral-900"}`} id="rooms">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
               Our Luxurious <span className="text-amber-500">Rooms</span>
             </h2>
-            <p className="text-neutral-400 text-lg">
+            <p className={`text-lg ${isDark ? "text-neutral-400" : "text-neutral-600"}`}>
               Indulge in unparalleled comfort and sophistication. Each room is meticulously designed 
               to provide an unforgettable stay at The Palace Resort.
             </p>
           </div>
           <Link 
             href="/rooms"
-            className="group flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all duration-300"
+            className={`group flex items-center gap-2 px-6 py-3 border rounded-full transition-all duration-300 ${
+              isDark 
+                ? "bg-white/10 hover:bg-white/20 border-white/20 text-white" 
+                : "bg-neutral-200/50 hover:bg-neutral-200 border-neutral-300 text-neutral-900"
+            }`}
           >
             See All Rooms
             <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
           </Link>
         </div>
 
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedRooms.map((room) => (
-            <CardSpotlight key={room.id} className="h-full min-h-[500px] flex flex-col p-6 cursor-pointer">
-              <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
-                <Image 
-                  src={room.image} 
-                  alt={room.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover/spotlight:scale-110"
-                />
-                <div className="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/20 text-sm font-semibold">
-                  {room.price} <span className="text-neutral-400 font-normal">/ Night</span>
-                </div>
-              </div>
-
-              <div className="flex-grow flex flex-col">
-                <h3 className="text-2xl font-bold mb-2 group-hover/spotlight:text-blue-400 transition-colors">
-                  {room.title}
-                </h3>
-                <p className="text-neutral-400 mb-6 text-sm line-clamp-2">
-                  {room.description}
-                </p>
-
-                <div className="mt-auto">
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {room.features.map((feature) => (
-                      <span 
-                        key={feature} 
-                        className="px-2 py-1 text-[10px] uppercase tracking-wider bg-white/5 border border-white/10 rounded"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-
-                  <button className="flex items-center gap-2 text-white font-semibold group/btn">
-                    Book This Room
-                    <MoveRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </CardSpotlight>
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className={`h-[500px] rounded-3xl animate-pulse ${isDark ? "bg-white/5" : "bg-black/5"}`} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {rooms.map((room) => (
+              <RoomCard key={room.id} room={room} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
