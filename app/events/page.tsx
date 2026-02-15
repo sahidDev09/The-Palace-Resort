@@ -210,9 +210,9 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tighter leading-[1]"
+              className="text-4xl md:text-6xl lg:text-7xl flex gap-3 font-extrabold mb-6 tracking-tighter leading-[1]"
             >
-              Extraordinary 
+              Extraordinary
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-orange-600 animate-gradient-x">
                 Celebrations
               </span>
