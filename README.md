@@ -12,6 +12,7 @@ Welcome to the digital home of **The Palace Resort**, a premium luxury destinati
 -   **🍽️ Gourmet Dining**: Explore our signature restaurants—Olive, Rebulation, Arabian Lounge, Lostalgia, and Saigon.
 -   **🛌 Luxury Accommodations**: Browse our diverse range of rooms and suites with interactive spotlight cards.
 -   **🎉 Grand Events**: Plan your perfect event in our banquet halls, meeting rooms, or lush outdoor lawns.
+-   **🖼️ Visual Gallery**: Explore the resort's beauty through an interactive bento-grid gallery with GSAP scroll velocity effects.
 -   **📱 Fully Responsive**: A seamless experience across mobile, tablet, and desktop devices.
 -   **⚡ High Performance**: Built with the latest web technologies for lightning-fast load times.
 
@@ -34,6 +35,10 @@ Welcome to the digital home of **The Palace Resort**, a premium luxury destinati
 ### 🎊 Events & Celebrations
 ![Events](./public/screenshots/events.png)
 *Detailed views of our versatile event venues, from banquet halls to fountain-view lawns.*
+
+### 🖼️ Resort Gallery
+![Gallery](./public/screenshots/gallery.png)
+*An interactive bento-grid gallery showcasing the resort's luxury through smooth GSAP animations.*
 
 ---
 
@@ -81,8 +86,8 @@ Welcome to the digital home of **The Palace Resort**, a premium luxury destinati
 
 ## 🏗️ Project Structure
 
--   `app/`: Contains the routes and layout of the application.
--   `components/`: Reusable UI components (Hero, Navbar, Section layouts, etc.).
+-   `app/`: Contains the routes and layout of the application (e.g., `/rooms`, `/dining`, `/events`, `/gallery`).
+-   `components/`: Reusable UI components including the `GalleryGrid`, `Hero`, `Navbar`, and more.
 -   `public/`: Static assets including images, fonts, and screenshots.
 -   `lib/`: Helper functions and constants.
 -   `hooks/`: Custom React hooks.
