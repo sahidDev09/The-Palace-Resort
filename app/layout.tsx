@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -14,10 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const therilo = localFont({
-  src: "../public/fonts/therilo.extra-bold-extra-bold.woff2",
-  variable: "--font-therilo",
-});
 
 export const metadata: Metadata = {
   title: "The Palace | Luxury Resort",
@@ -36,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${therilo.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
