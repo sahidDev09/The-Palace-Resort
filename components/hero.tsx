@@ -15,10 +15,46 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Variants } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MagneticButton } from "@/components/magnetic-button";
+import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
   const mounted = useIsMounted();
+  const containerRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  // GSAP scroll effects
+  useGSAP(() => {
+    if (!mounted) return;
+    
+    gsap.to(bgRef.current, {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      }
+    });
+
+    gsap.to(".hero-parallax-content", {
+      y: 50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      }
+    });
+  }, { scope: containerRef, dependencies: [mounted] });
 
   if (!mounted) return null;
 
@@ -58,9 +94,9 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center py-24 w-full overflow-hidden">
+    <section ref={containerRef} className="relative min-h-[90vh] flex items-center py-24 w-full overflow-hidden">
       {/* Background Images - No Scale, No Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div ref={bgRef} className="absolute inset-0 z-0 h-[120vh] -top-[10vh]">
         <AnimatePresence initial={false}>
           <motion.div
             key={resolvedTheme}
@@ -93,7 +129,7 @@ export function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="container relative z-10 mx-auto flex flex-col gap-16 mt-4"
+        className="hero-parallax-content container relative z-10 mx-auto flex flex-col gap-16 mt-4"
       >
         {/* Row 1: Heading/Description & Quick Services */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
@@ -162,22 +198,26 @@ export function Hero() {
         <div className="flex flex-col lg:flex-row justify-between items-end gap-12 w-full">
           {/* Bottom Left: Action Buttons */}
           <div className="flex flex-wrap gap-6">
-            <motion.button 
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-10 py-5 rounded-2xl bg-amber-500 text-white font-bold uppercase tracking-[0.2em] text-sm shadow-[0_10px_30px_rgba(245,158,11,0.3)] hover:bg-amber-600 transition-all"
-            >
-              Explore Now
-            </motion.button>
-            <motion.button 
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-white hover:text-black transition-all"
-            >
-              View Gallery
-            </motion.button>
+            <MagneticButton>
+              <motion.button 
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="block px-10 py-5 rounded-2xl bg-amber-500 text-white font-bold uppercase tracking-[0.2em] text-sm shadow-[0_10px_30px_rgba(245,158,11,0.3)] hover:bg-amber-600 transition-all pointer-events-auto"
+              >
+                Explore Now
+              </motion.button>
+            </MagneticButton>
+            <MagneticButton>
+              <motion.button 
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="block px-10 py-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-white hover:text-black transition-all pointer-events-auto"
+              >
+                View Gallery
+              </motion.button>
+            </MagneticButton>
           </div>
 
           {/* Bottom Right: Stats */}

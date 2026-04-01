@@ -4,6 +4,12 @@ import { Marquee } from "@/components/ui/marquee";
 import Image from "next/image";
 import { Star, Quote } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const reviews = [
   {
@@ -112,18 +118,34 @@ const ReviewCard = ({
 export function FeedbackSection() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    gsap.from(".feedback-animate", {
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 75%",
+      }
+    });
+  }, { scope: containerRef });
+
   return (
-    <section className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-14">
+    <section ref={containerRef} className="relative flex min-h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background py-14">
       {/* Background decorative blobs */}
       <div className="pointer-events-none absolute top-1/4 -left-32 h-64 w-64 rounded-full bg-orange-400/5 blur-3xl dark:bg-orange-500/10" />
       <div className="pointer-events-none absolute bottom-1/4 -right-32 h-64 w-64 rounded-full bg-blue-400/5 blur-3xl dark:bg-blue-500/10" />
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-purple-400/3 blur-3xl dark:bg-purple-500/5" />
 
       <div className="relative z-10 mb-16 px-4 text-center">
-        <h2 className={`text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl ${isDark ? "text-white" : "text-black"}`}>
+        <h2 className={`feedback-animate text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl ${isDark ? "text-white" : "text-black"}`}>
           What Our Guests Say
         </h2>
-        <div className="mt-4 flex flex-col items-center gap-2">
+        <div className="feedback-animate mt-4 flex flex-col items-center gap-2">
           <div className="h-1 w-20 rounded-full bg-gradient-to-r from-orange-400 to-orange-600" />
           <p className={`max-w-4xl text-lg ${isDark ? "text-white" : "text-black"}`}>
             Discover why travelers choose The Palace Resort for their most memorable stays and dining experiences.

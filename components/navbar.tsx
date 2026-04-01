@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { MagneticButton } from "@/components/magnetic-button";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,14 +59,16 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: i * 0.1 }}
             >
-              <Link
-                href={`/${item.toLowerCase().replace(" ", "")}`}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isDarkText ? "text-zinc-800" : "text-zinc-100"
-                }`}
-              >
-                {item}
-              </Link>
+              <MagneticButton>
+                <Link
+                  href={`/${item.toLowerCase().replace(" ", "")}`}
+                  className={`block px-2 py-1 text-sm font-medium transition-colors hover:text-primary ${
+                    isDarkText ? "text-zinc-800" : "text-zinc-100"
+                  }`}
+                >
+                  {item}
+                </Link>
+              </MagneticButton>
             </motion.div>
           ))}
         </div>
@@ -77,9 +80,11 @@ export function Navbar() {
           transition={{ duration: 0.5 }}
         >
           <ThemeToggle isScrolled={isScrolled} />
-          <button className="rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] transition-all hover:bg-amber-600 hover:shadow-[0_6px_20px_rgba(245,158,11,0.23)] active:scale-95">
-            Book Now
-          </button>
+          <MagneticButton>
+            <button className="block rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] transition-all hover:bg-amber-600 hover:shadow-[0_6px_20px_rgba(245,158,11,0.23)] active:scale-95 pointer-events-auto">
+              Book Now
+            </button>
+          </MagneticButton>
         </motion.div>
       </div>
     </nav>

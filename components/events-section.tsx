@@ -7,6 +7,12 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Sparkles, Users } from "lucide-react";
 import { useTheme } from "next-themes";
 import { EVENT_VENUES } from "@/lib/constants";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MagneticButton } from "@/components/magnetic-button";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function EventsSection() {
   const { resolvedTheme } = useTheme();
@@ -16,6 +22,22 @@ export function EventsSection() {
 
   // Show only a few venues on the home page
   const featuredVenues = EVENT_VENUES.slice(0, 4);
+
+  useGSAP(() => {
+    const images = gsap.utils.toArray(".parallax-image") as HTMLElement[];
+    images.forEach((img) => {
+      gsap.to(img, {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: img.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+    });
+  }, { scope: ref });
 
   return (
     <section ref={ref} className={`relative py-12 overflow-hidden ${isDark ? "bg-neutral-950" : "bg-white"}`}>
@@ -92,7 +114,7 @@ export function EventsSection() {
                 src={venue.image}
                 alt={venue.name}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="parallax-image object-cover scale-[1.2] -top-[10%] transition-transform duration-700 group-hover:scale-[1.25]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               
@@ -137,7 +159,7 @@ export function EventsSection() {
                 src="/assets/events/own-event.jpg" 
                 alt="Plan Your Own Event" 
                 fill 
-                className="object-cover transition-transform duration-[2s] group-hover:scale-105"
+                className="parallax-image object-cover scale-[1.2] -top-[10%] transition-transform duration-[2s] group-hover:scale-[1.25]"
             />
             <div className={`absolute inset-0 ${isDark ? "bg-black/60" : "bg-black/40"} backdrop-blur-[2px]`} />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
@@ -148,12 +170,14 @@ export function EventsSection() {
                 <p className="text-zinc-200 text-base max-w-xl mb-6">
                     Let us bring your unique vision to life with our expert planning and bespoke services.
                 </p>
-                <Link 
-                    href="/events" 
-                    className="bg-white text-black font-bold px-8 py-3 rounded-xl hover:bg-amber-500 hover:text-white transition-all duration-300 transform group-hover:scale-105"
-                >
-                    Get Started
-                </Link>
+                <MagneticButton className="transform group-hover:scale-105">
+                  <Link 
+                      href="/events" 
+                      className="block bg-white text-black font-bold px-8 py-3 rounded-xl hover:bg-amber-500 hover:text-white transition-all duration-300 pointer-events-auto"
+                  >
+                      Get Started
+                  </Link>
+                </MagneticButton>
             </div>
         </motion.div>
       </div>
