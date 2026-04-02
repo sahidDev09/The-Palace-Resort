@@ -26,16 +26,19 @@ export function EventsSection() {
   useGSAP(() => {
     const images = gsap.utils.toArray(".parallax-image") as HTMLElement[];
     images.forEach((img) => {
-      gsap.to(img, {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: img.parentElement,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+      gsap.fromTo(img, 
+        { yPercent: -15 },
+        {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          }
         }
-      });
+      );
     });
   }, { scope: ref });
 
@@ -114,7 +117,7 @@ export function EventsSection() {
                 src={venue.image}
                 alt={venue.name}
                 fill
-                className="parallax-image object-cover scale-[1.2] -top-[10%] transition-transform duration-700 group-hover:scale-[1.25]"
+                className="parallax-image object-cover scale-[1.3] transition-transform duration-700 group-hover:scale-[1.35]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               
@@ -159,7 +162,7 @@ export function EventsSection() {
                 src="/assets/events/own-event.jpg" 
                 alt="Plan Your Own Event" 
                 fill 
-                className="parallax-image object-cover scale-[1.2] -top-[10%] transition-transform duration-[2s] group-hover:scale-[1.25]"
+                className="parallax-image object-cover scale-[1.3] transition-transform duration-[2s] group-hover:scale-[1.35]"
             />
             <div className={`absolute inset-0 ${isDark ? "bg-black/60" : "bg-black/40"} backdrop-blur-[2px]`} />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "next-themes";
+
 import { ArrowRight, Sparkles, Phone, Calendar } from "lucide-react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
@@ -12,34 +12,38 @@ import { useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 export function CallToAction() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    gsap.from(".cta-animate", {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 75%",
+    gsap.fromTo(".cta-animate", 
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
       }
-    });
+    );
 
-    gsap.from(".trust-card", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 60%",
+    gsap.fromTo(".trust-card", 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+        }
       }
-    });
+    );
   }, { scope: containerRef });
 
   return (
@@ -65,11 +69,7 @@ export function CallToAction() {
         <div className="flex flex-col items-center text-center">
           
           {/* Heading */}
-          <h2
-            className={`cta-animate max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl ${
-              isDark ? "text-white" : "text-zinc-900"
-            }`}
-          >
+          <h2 className="cta-animate max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
             Your Luxury Escape{" "}
             <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 bg-clip-text text-transparent">
               Awaits
@@ -77,11 +77,7 @@ export function CallToAction() {
           </h2>
 
           {/* Description */}
-          <p
-            className={`cta-animate mt-6 max-w-2xl text-lg leading-relaxed md:text-xl ${
-              isDark ? "text-zinc-400" : "text-zinc-600"
-            }`}
-          >
+          <p className="cta-animate mt-6 max-w-2xl text-lg leading-relaxed md:text-xl text-muted-foreground">
             Book your stay today and experience the world-class hospitality of The Palace Resort.
             Enjoy exclusive rates, complimentary spa sessions, and a sunset dinner for two.
           </p>
@@ -101,14 +97,7 @@ export function CallToAction() {
             </MagneticButton>
 
             <MagneticButton>
-              <Link
-                href="#"
-                className={`group inline-flex items-center gap-3 rounded-full border-2 px-8 py-4 text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 pointer-events-auto ${
-                  isDark
-                    ? "border-zinc-700 text-white hover:border-orange-400/50 hover:bg-orange-500/5"
-                    : "border-zinc-300 text-zinc-800 hover:border-orange-400/50 hover:bg-orange-500/5"
-                }`}
-              >
+              <Link href="#" className="group inline-flex items-center gap-3 rounded-full border-2 px-8 py-4 text-base font-semibold transition-all duration-300 hover:-translate-y-0.5 pointer-events-auto border-border text-foreground hover:border-orange-400/50 hover:bg-orange-500/5">
                 <Phone className="h-5 w-5 transition-colors group-hover:text-orange-500" />
                 <span>Contact Us</span>
               </Link>
@@ -136,23 +125,15 @@ export function CallToAction() {
             ].map((item) => (
               <div
                 key={item.title}
-                className={`trust-card glass-card group flex flex-col items-center rounded-2xl px-6 py-8 text-center transition-all duration-500 hover:-translate-y-1`}
+                className={`trust-card glass-card group flex flex-col items-center rounded-2xl px-6 py-8 text-center transition-shadow duration-300 hover:shadow-xl`}
               >
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-orange-500/10 ring-1 ring-orange-500/20 transition-all duration-300 group-hover:bg-orange-500/15 group-hover:ring-orange-500/40 group-hover:shadow-[0_0_20px_rgba(245,158,11,0.1)]">
                   {item.icon}
                 </div>
-                <h3
-                  className={`mb-2 text-lg font-bold ${
-                    isDark ? "text-white" : "text-zinc-900"
-                  }`}
-                >
+                <h3 className="mb-2 text-lg font-bold text-foreground">
                   {item.title}
                 </h3>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    isDark ? "text-zinc-400" : "text-zinc-600"
-                  }`}
-                >
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {item.desc}
                 </p>
               </div>
